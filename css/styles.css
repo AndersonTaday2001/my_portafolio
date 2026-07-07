@@ -1,0 +1,297 @@
+/* ===========================
+   1. VARIABLES (design tokens)
+   =========================== */
+:root {
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-border: #e2e5eb;
+  --color-text: #1c2333;
+  --color-text-muted: #5a6472;
+  --color-accent: #2d5f5d;
+  --color-accent-dark: #1f4544;
+
+  --font-heading: "Sora", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --max-width: 960px;
+  --radius: 10px;
+  --transition: 0.2s ease;
+}
+
+/* ===========================
+   2. RESET BÁSICO
+   =========================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-accent-dark);
+}
+
+ul {
+  list-style: none;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Accesibilidad: foco visible para navegación por teclado */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ===========================
+   3. HEADER / NAV
+   =========================== */
+header {
+  position: sticky;
+  top: 0;
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 10;
+}
+
+header nav {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.1rem 1.5rem;
+}
+
+header nav a {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-text);
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+}
+
+header nav a::before {
+  content: "// ";
+  color: var(--color-accent);
+}
+
+header nav a:hover {
+  color: var(--color-accent);
+}
+
+/* ===========================
+   4. MAIN / SECTIONS GENERALES
+   =========================== */
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+section {
+  padding: 4.5rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+section:last-child {
+  border-bottom: none;
+}
+
+/* ===========================
+   5. SOBRE MÍ
+   =========================== */
+.sobre-mi-content {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.sobre-mi-content img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--color-surface);
+  box-shadow: 0 0 0 3px var(--color-accent);
+  flex-shrink: 0;
+}
+
+.sobre-mi-content p {
+  color: var(--color-text-muted);
+}
+
+/* ===========================
+   6. PROYECTOS
+   =========================== */
+.proyectos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.proyectos-grid article {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.proyectos-grid article:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(28, 35, 51, 0.08);
+}
+
+.proyectos-grid p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  flex-grow: 1;
+  margin-bottom: 1.2rem;
+}
+
+.proyectos-grid a {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ===========================
+   7. HABILIDADES
+   =========================== */
+#habilidades ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+#habilidades li {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-accent-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+}
+
+/* ===========================
+   8. CONTACTO
+   =========================== */
+#contacto p {
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+#contacto ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+#contacto a {
+  font-weight: 500;
+}
+
+/* ===========================
+   9. FOOTER
+   =========================== */
+footer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+footer p {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+footer a {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+/* ===========================
+   10. RESPONSIVE
+   =========================== */
+@media (max-width: 640px) {
+  header nav {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .sobre-mi-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  section {
+    padding: 3rem 0;
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ===========================
+   11. ACCESIBILIDAD: reduced motion
+   =========================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .proyectos-grid article {
+    transition: none;
+  }
+}
