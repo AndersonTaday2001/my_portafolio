@@ -8,17 +8,24 @@
       content="Portafolio de Anderson Taday, desarrollador web"
     />
     <title>Mi Portafolio | Anderson Taday</title>
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Sora:wght@600;700&display=swap"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <header>
-      <nav aria-label="Navegación principal">
+      <nav class="navbar">
+        <button
+          class="navbar__toggle"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <a href="#sobre-mi">Sobre mí</a>
         <a href="#proyectos">Proyectos</a>
         <a href="#habilidades">Habilidades</a>
@@ -30,15 +37,19 @@
       <section id="sobre-mi">
         <h2>Sobre mí</h2>
         <div class="sobre-mi-content">
-          <img src="img/foto.jpg" alt="Foto de Anderson Taday" />
+          <img src="img/fotos.png" alt="Foto de Anderson Taday" />
           <p>
-            Soy Anderson Taday, estudiante de Ingeniería en Ciencias de la
-            Computación en la Universidad Nacional de Loja y desarrollador web
-            apasionado por la creación de aplicaciones modernas. Tengo interés
-            en el desarrollo tanto del backend como del frontend, con un enfoque
-            en escribir código limpio, escalable y mantenible. Disfruto aprender
-            nuevas tecnologías, asumir nuevos retos y transformar ideas en
-            soluciones de software que aporten valor.
+            Soy Anderson Taday, ingeniero en Ciencias de la Computación por la
+            Universidad Nacional de Loja y desarrollador web enfocado en
+            construir aplicaciones web modernas, escalables y de alto
+            rendimiento. Tengo experiencia desarrollando soluciones tanto en
+            backend como en frontend, aplicando principios de arquitectura,
+            código limpio y buenas prácticas para crear software mantenible y
+            confiable. Me motiva aprender de forma continua, asumir nuevos retos
+            y convertir ideas en soluciones tecnológicas que resuelvan problemas
+            reales. Disfruto trabajar en proyectos donde pueda aportar con
+            pensamiento analítico, atención al detalle y una mejora constante de
+            mis habilidades como desarrollador.
           </p>
         </div>
       </section>
@@ -119,7 +130,7 @@
           </li>
           <li>
             <a
-              href="https://www.linkedin.com/in/anderson-taday"
+              href="https://www.linkedin.com/in/anderson-manuel-taday-sanchez-344b96276/"
               target="_blank"
               rel="noopener"
             >
@@ -128,11 +139,22 @@
           </li>
           <li>
             <a
-              href="https://github.com/tuusuario"
+              href="https://github.com/AndersonTaday2001"
               target="_blank"
               rel="noopener"
             >
               GitHub
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://wa.me/593985144297?text=Hola%20Anderson,%20vi%20tu%20portafolio."
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Contactar por WhatsApp"
+            >
+              <i class="fa-brands fa-whatsapp"></i>
+              Escríbeme por WhatsApp
             </a>
           </li>
         </ul>
@@ -143,5 +165,7 @@
       <a href="#sobre-mi">Volver al inicio</a>
       <p>&copy; 2026 Anderson Taday. Todos los derechos reservados.</p>
     </footer>
+
+    <script src="script/script.js"></script>
   </body>
 </html>

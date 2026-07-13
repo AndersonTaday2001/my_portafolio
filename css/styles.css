@@ -1,297 +1,407 @@
-/* ===========================
-   1. VARIABLES (design tokens)
-   =========================== */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
 :root {
-  --color-bg: #f7f8fa;
-  --color-surface: #ffffff;
-  --color-border: #e2e5eb;
-  --color-text: #1c2333;
-  --color-text-muted: #5a6472;
-  --color-accent: #2d5f5d;
-  --color-accent-dark: #1f4544;
+  /* Colores */
+  --color-bg: #f2f0eb; /* Color del fondo principal*/
+  --color-bg-alt: #faf9f6; /*Fondo alterno/cards */
+  --color-text: #1c1d1b; /* Texto principal */
+  --color-text-muted: #6b6b63; /* Texto secundario */
+  --color-accent: #2f4a3e; /* Acento (links, botones)*/
+  --color-accent-soft: #8fa396; /* Acento suave (hover, detalles)*/
 
-  --font-heading: "Sora", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  /* Tipografía */
+  --font-display: "Fraunces", serif; /* Titulos */
+  --font-body: "Inter", sans-serif; /* Cuerpo */
+  --font-mono: "JetBrains Mono", monospace; /* Detalles */
 
-  --max-width: 960px;
-  --radius: 10px;
-  --transition: 0.2s ease;
+  /* Espaciado base */
+  --space-unit: 8px;
+  --header-height: 64px;
 }
 
-/* ===========================
-   2. RESET BÁSICO
-   =========================== */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  box-sizing: border-box; /* padding y border ya no suman al ancho/alto declarado, evita desbordes */
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* desplazamiento suave al hacer clic en los links del navbar */
 }
 
 body {
-  font-family: var(--font-body);
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+  background-color: var(--color-bg); /* color de fondo */
+  margin: 0;
 }
 
 img {
-  max-width: 100%;
+  max-width: 100%; /* ninguna imagen se desborda de su contenedor */
   display: block;
 }
 
-a {
-  color: var(--color-accent);
-  text-decoration: none;
-  transition: color var(--transition);
-}
-
-a:hover,
-a:focus-visible {
-  color: var(--color-accent-dark);
-}
-
-ul {
-  list-style: none;
-}
-
-h2 {
-  font-family: var(--font-heading);
-  font-size: 1.9rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-}
-
-h3 {
-  font-family: var(--font-heading);
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-/* Accesibilidad: foco visible para navegación por teclado */
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-accent); /* foco visible para navegación por teclado */
   outline-offset: 3px;
 }
 
-/* ===========================
-   3. HEADER / NAV
-   =========================== */
+/* ==========================================================================
+   HEADER / NAVBAR
+   ========================================================================== */
+
 header {
-  position: sticky;
-  top: 0;
-  background-color: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
-  z-index: 10;
-}
-
-header nav {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  padding: 1.1rem 1.5rem;
-}
-
-header nav a {
   font-family: var(--font-mono);
+  background-color: var(--color-bg-alt);
+  position: fixed; /* Fijar el navbar al flujo normal de la ventana*/
+  top: 0;
+  left: 0;
+  padding: 1rem 1rem;
+  width: 100%;
+  z-index: 100;
+  border-bottom: 1px solid rgba(28, 29, 27, 0.08);
+}
+
+.navbar {
+  display: flex; /* pone los links en fila, uno al lado del otro */
+  justify-content: center; /* los centra horizontalmente */
+  align-items: center; /* los alinea verticalmente al centro */
+  gap: 2.5rem; /* espacio entre cada link */
+  flex-wrap: wrap; /* si no caben, pasan a otra línea (útil en móvil) */
+  position: relative;
+}
+
+.navbar a {
+  color: var(--color-text-muted); /* color por defecto: gris piedra, discreto */
+  text-decoration: none; /* quita el subrayado */
   font-size: 0.85rem;
-  color: var(--color-text);
-  text-transform: lowercase;
-  letter-spacing: 0.02em;
+  text-transform: uppercase; /* MAYÚSCULAS, le da look editorial/minimalista */
+  letter-spacing: 0.05em; /* separa un poco las letras, mejora legibilidad en mayúsculas */
+  transition: color 0.2s ease; /* suaviza el cambio de color al pasar el mouse */
 }
 
-header nav a::before {
-  content: "// ";
-  color: var(--color-accent);
+.navbar a:hover {
+  color: var(--color-accent); /* al pasar el mouse, cambia al verde bosque */
 }
 
-header nav a:hover {
-  color: var(--color-accent);
+/* Botón hamburguesa (oculto en escritorio) */
+.navbar__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  position: absolute;
+  right: 0;
 }
 
-/* ===========================
-   4. MAIN / SECTIONS GENERALES
-   =========================== */
+.navbar__toggle span {
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-text);
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+/* Animación del ícono hamburguesa hacia una "X" cuando el menú está abierto */
+.navbar.is-open .navbar__toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar.is-open .navbar__toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar.is-open .navbar__toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   MAIN / SECTIONS
+   ========================================================================== */
+
 main {
-  max-width: var(--max-width);
-  margin: 0 auto;
+  max-width: 1000px; /* limita el ancho para que no se estire demasiado en pantallas grandes */
+  margin: 0 auto; /* centra el contenido horizontalmente */
   padding: 0 1.5rem;
+  padding-top: var(
+    --header-height
+  ); /* compensa el header fijo para que no tape el contenido */
 }
 
 section {
-  padding: 4.5rem 0;
-  border-bottom: 1px solid var(--color-border);
+  padding: 6rem 0; /* espacio arriba/abajo generoso entre secciones */
+  border-bottom: 1px solid rgba(28, 29, 27, 0.08); /* línea sutil que separa secciones */
+  scroll-margin-top: var(
+    --header-height
+  ); /* evita que el header fijo tape el título al saltar a la sección */
 }
 
 section:last-child {
-  border-bottom: none;
+  border-bottom: none; /* la última sección no necesita línea */
 }
 
-/* ===========================
-   5. SOBRE MÍ
-   =========================== */
+section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(
+    1.5rem,
+    4vw,
+    2rem
+  ); /* se adapta suave entre móvil y escritorio */
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 2.5rem;
+}
+
+section p {
+  font-family: var(--font-body);
+  text-align: justify;
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   SOBRE MÍ
+   ========================================================================== */
+
 .sobre-mi-content {
-  display: flex;
-  gap: 2.5rem;
-  align-items: center;
+  display: flex; /* pone la imagen y el texto en fila */
+  align-items: center; /* los centra verticalmente entre sí */
+  gap: 3rem; /* espacio entre imagen y texto */
 }
 
 .sobre-mi-content img {
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid var(--color-surface);
-  box-shadow: 0 0 0 3px var(--color-accent);
-  flex-shrink: 0;
+  width: 220px;
+  height: 320px;
+  object-fit: cover; /* recorta la imagen sin deformarla, llenando el cuadro */
+  border-radius: 50%; /* la vuelve circular */
+  flex-shrink: 0; /* evita que la imagen se achique si el texto es largo */
 }
 
 .sobre-mi-content p {
   color: var(--color-text-muted);
+  font-size: 1rem;
 }
 
-/* ===========================
-   6. PROYECTOS
-   =========================== */
+/* ==========================================================================
+   PROYECTOS
+   ========================================================================== */
+
 .proyectos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(260px, 1fr)
+  ); /* columnas automáticas, mínimo 260px cada una */
   gap: 1.5rem;
 }
 
 .proyectos-grid article {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
+  background-color: var(--color-bg-alt);
+  border: 1px solid rgba(28, 29, 27, 0.08);
+  border-radius: 8px;
+  padding: 1.75rem;
   display: flex;
   flex-direction: column;
   transition:
-    transform var(--transition),
-    box-shadow var(--transition);
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .proyectos-grid article:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(28, 35, 51, 0.08);
+  transform: translateY(
+    -4px
+  ); /* la tarjeta "se levanta" un poco al pasar el mouse */
+  box-shadow: 0 8px 20px rgba(28, 29, 27, 0.06);
+}
+
+.proyectos-grid h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--color-text);
+  margin: 0 0 0.75rem;
 }
 
 .proyectos-grid p {
   color: var(--color-text-muted);
-  font-size: 0.95rem;
-  flex-grow: 1;
-  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+  flex-grow: 1; /* empuja el link hacia abajo, así todos quedan alineados aunque el texto varíe en longitud */
+  margin-bottom: 1.25rem;
 }
 
 .proyectos-grid a {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+  text-decoration: none;
 }
 
-/* ===========================
-   7. HABILIDADES
-   =========================== */
+.proyectos-grid a:hover {
+  color: var(--color-accent-soft);
+}
+
+/* ==========================================================================
+   HABILIDADES
+   ========================================================================== */
+
 #habilidades ul {
+  list-style: none;
+  padding: 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* si no caben en una línea, pasan a la siguiente */
   gap: 0.75rem;
 }
 
 #habilidades li {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  color: var(--color-accent-dark);
+  color: var(--color-accent);
+  background-color: var(--color-bg-alt);
+  border: 1px solid rgba(47, 74, 62, 0.2);
   padding: 0.5rem 1rem;
-  border-radius: 999px;
+  border-radius: 100px; /* forma de "pastilla" o "tag" */
 }
 
-/* ===========================
-   8. CONTACTO
-   =========================== */
-#contacto p {
-  color: var(--color-text-muted);
-  margin-bottom: 1rem;
-}
+/* ==========================================================================
+   CONTACTO
+   ========================================================================== */
 
 #contacto ul {
+  list-style: none;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
 }
 
 #contacto a {
-  font-weight: 500;
-}
-
-/* ===========================
-   9. FOOTER
-   =========================== */
-footer {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
+  color: var(--color-accent);
+  text-decoration: none;
+  font-size: 0.95rem;
+  display: inline-flex; /* permite alinear el ícono de WhatsApp con el texto */
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.5rem;
+  transition: color 0.2s ease;
 }
 
-footer p {
-  color: var(--color-text-muted);
-  font-size: 0.85rem;
+#contacto a:hover {
+  color: var(--color-accent-soft);
+}
+
+#contacto i {
+  font-size: 1.1rem;
+}
+
+/* Acento de marca para el ícono de WhatsApp */
+#contacto a[href*="wa.me"] i {
+  color: #25d366;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+footer {
+  display: flex;
+  flex-direction: column; /* apila el link y el copyright, uno encima del otro */
+  align-items: center; /* los centra horizontalmente */
+  gap: 1rem;
+  padding: 3rem 1.5rem;
+  background-color: var(--color-bg-alt);
+  border-top: 1px solid rgba(28, 29, 27, 0.08); /* línea sutil que separa el footer del contenido */
+  text-align: center;
 }
 
 footer a {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-/* ===========================
-   10. RESPONSIVE
-   =========================== */
-@media (max-width: 640px) {
-  header nav {
-    gap: 1rem;
-    flex-wrap: wrap;
+footer a:hover {
+  color: var(--color-accent-soft);
+}
+
+footer p {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE - TABLET
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  section {
+    padding: 4rem 0; /* menos espacio vertical que en escritorio */
   }
 
+  .proyectos-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE - MÓVIL
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  main {
+    padding: 0 1rem;
+    padding-top: var(--header-height);
+  }
+
+  header {
+    padding: 0.75rem 1rem;
+  }
+
+  /* Navbar se convierte en menú desplegable */
+  .navbar {
+    justify-content: flex-start;
+  }
+
+  .navbar__toggle {
+    display: flex;
+  }
+
+  .navbar a {
+    display: none; /* ocultos hasta abrir el menú */
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 0;
+  }
+
+  .navbar.is-open {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .navbar.is-open a {
+    display: block;
+  }
+
+  /* Sobre mí: imagen arriba, texto abajo, centrado */
   .sobre-mi-content {
     flex-direction: column;
     text-align: center;
+    gap: 1.5rem;
   }
 
-  section {
-    padding: 3rem 0;
+  .sobre-mi-content img {
+    width: 160px;
+    height: 160px;
   }
 
-  footer {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-/* ===========================
-   11. ACCESIBILIDAD: reduced motion
-   =========================== */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .proyectos-grid article {
-    transition: none;
+  .proyectos-grid {
+    grid-template-columns: 1fr; /* una sola columna */
   }
 }
